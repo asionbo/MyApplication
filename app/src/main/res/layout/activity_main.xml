@@ -1,70 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.asionbo.myapplication.MainActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        tools:layout_editor_absoluteY="247dp"
-        tools:layout_editor_absoluteX="143dp" />
+        android:layout_centerInParent="true"
+        android:text="Hello World!" />
+
     <Button
         android:id="@+id/btn"
-        android:layout_width="368dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="click me"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp" />
+        android:text="click me" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fab_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:fab_addButtonSize="normal"
-        app:fab_labelStyle="@style/menu_labels_style"
-        app:fab_labelsPosition="left"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         app:fab_addButtonColorNormal="@color/colorPrimary"
         app:fab_addButtonColorPressed="@color/colorAccent"
+        app:fab_addButtonSize="normal"
         app:fab_addButtonStrokeVisible="true"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="494dp">
+        app:fab_labelStyle="@style/menu_labels_style"
+        app:fab_labelsPosition="left">
+
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_notes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimary"
             app:fab_colorPressed="@color/colorAccent"
-            app:fab_size="mini"
             app:fab_icon="@drawable/ic_note_add_white_24dp"
-            app:fab_title="notes"/>
+            app:fab_size="mini"
+            app:fab_title="notes" />
+
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimary"
             app:fab_colorPressed="@color/colorAccent"
-            app:fab_size="mini"
             app:fab_icon="@drawable/ic_pause_white_24dp"
-            app:fab_title="stop"/>
+            app:fab_size="mini"
+            app:fab_title="stop" />
+
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_pending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimary"
             app:fab_colorPressed="@color/colorAccent"
-            app:fab_size="mini"
             app:fab_icon="@drawable/ic_lock_outline_white_24dp"
-            app:fab_title="pending"/>
+            app:fab_size="mini"
+            app:fab_title="pending" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
