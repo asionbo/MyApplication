@@ -29,12 +29,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fabStop = (FloatingActionButton) findViewById(R.id.fab_stop);
         FloatingActionButton fabPending= (FloatingActionButton) findViewById(R.id.fab_pending);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"hello world",Toast.LENGTH_LONG).show();
-            }
-        });
+        btn.setOnClickListener(view13 -> Toast.makeText(getApplicationContext(),"hello world",Toast.LENGTH_LONG).show());
 
         btn.setOnLongClickListener(view1 -> {
 
