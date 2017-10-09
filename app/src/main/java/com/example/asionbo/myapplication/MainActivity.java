@@ -1,18 +1,18 @@
 package com.example.asionbo.myapplication;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asionbo.myapplication.ui.TraceActivity;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView view = new TextView(this);
-        view.setText("hello world!");
+        view.setText("长按按钮跳转");
         view.setGravity(Gravity.CENTER);
         view.setTextColor(getResources().getColor(android.R.color.black));
         Button btn = (Button) findViewById(R.id.btn);
@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(view13 -> Toast.makeText(getApplicationContext(),"hello world",Toast.LENGTH_LONG).show());
 
         btn.setOnLongClickListener(view1 -> {
-
+            Intent intent = new Intent(this,TraceActivity.class);
+            startActivity(intent);
             return false;
         });
 
