@@ -1,56 +1,48 @@
 package com.example.asionbo.myapplication;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asionbo.myapplication.event.Event;
+import com.example.asionbo.myapplication.ui.ChartActivity;
 import com.example.asionbo.myapplication.ui.TraceActivity;
+import com.example.asionbo.myapplication.ui.fragment.MainFragment;
+import com.example.asionbo.myapplication.utils.Constant;
+import com.example.asionbo.myapplication.utils.LogUtils;
+import com.example.asionbo.myapplication.utils.RxBus;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
 public class MainActivity extends BaseActivity {
 
+    private Fragment fragment;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void init() {
 
-        TextView view = new TextView(this);
-        view.setText("长按按钮跳转");
-        view.setGravity(Gravity.CENTER);
-        view.setTextColor(getResources().getColor(android.R.color.black));
-        Button btn = (Button) findViewById(R.id.btn);
-        FloatingActionsMenu fabMenu = (FloatingActionsMenu) findViewById(R.id.fab_menu);
-        FloatingActionButton fabNotes = (FloatingActionButton) findViewById(R.id.fab_notes);
-        FloatingActionButton fabStop = (FloatingActionButton) findViewById(R.id.fab_stop);
-        FloatingActionButton fabPending= (FloatingActionButton) findViewById(R.id.fab_pending);
+    }
 
-        btn.setOnClickListener(view13 -> Toast.makeText(getApplicationContext(),"hello world",Toast.LENGTH_LONG).show());
+    @Override
+    protected Fragment getContentFragment() {
+        fragment = new MainFragment();
+        return fragment;
+    }
 
-        btn.setOnLongClickListener(view1 -> {
-            Intent intent = new Intent(this,TraceActivity.class);
-            startActivity(intent);
-            return false;
-        });
-
-        fabNotes.setOnClickListener(v1 ->{
-            Snackbar.make(v1,"click notes",Snackbar.LENGTH_SHORT).show();
-            fabMenu.collapse();
-        });
-        fabStop.setOnClickListener(v2 -> {
-            Snackbar.make(v2,"click stop",Snackbar.LENGTH_SHORT).show();
-            fabMenu.collapse();
-        });
-        fabPending.setOnClickListener(v3 -> {
-            Snackbar.make(v3,"click pending",Snackbar.LENGTH_SHORT)
-                    .setAction("undo", view12 -> {
-                        Toast.makeText(getApplicationContext(),"undo action",Toast.LENGTH_SHORT).show();
-                    }).show();
-            fabMenu.collapse();
-        });
+    //键盘的录入结果
+    @Override
+    public void show(String str) {
+        TextView tvShow = (TextView) fragment.getView().findViewById(R.id.tv_show);
+        tvShow.setText(str);
     }
 }

@@ -3,6 +3,7 @@ package com.example.asionbo.myapplication.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -20,7 +21,7 @@ import butterknife.BindView;
  * Created by asionbo on 2017/10/8.
  */
 
-public class TraceActivity extends BaseActivity{
+public class TraceActivity extends AppCompatActivity{
 
     @BindView(R.id.rv_list)
     RecyclerView mRecyclerView;
