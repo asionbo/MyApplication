@@ -32,7 +32,6 @@ public class MainActivity extends BaseActivity {
     protected void init() {
 
     }
-
     @Override
     protected Fragment getContentFragment() {
         fragment = new MainFragment();

@@ -12,15 +12,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.example.asionbo.myapplication.BaseActivity;
 import com.example.asionbo.myapplication.R;
 import com.example.asionbo.myapplication.utils.ChartTimeFormatter;
 import com.example.asionbo.myapplication.utils.LogUtils;
@@ -39,7 +36,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import kotlin.Function;
+import butterknife.ButterKnife;
 
 /**
  * Created by asionbo on 2017/10/9.
@@ -47,16 +44,17 @@ import kotlin.Function;
 
 public class ChartActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolBar) Toolbar mToolbar;
     @BindView(R.id.bc_content) BarChart mChart;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        ButterKnife.bind(this);
+//        setSupportActionBar(mToolbar);
+//        ActionBar actionBar = getSupportActionBar();
+//        assert actionBar != null;
+//        actionBar.setDisplayHomeAsUpEnabled(true);
         setTitle("chart-Test");
         initView();
     }

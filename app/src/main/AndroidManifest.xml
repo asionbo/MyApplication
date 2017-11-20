@@ -18,8 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.TraceActivity"/>
-        <activity android:name=".ui.ChartActivity"
-            android:theme="@style/AppThemeNoActionBar"/>
+        <activity android:name=".ui.ChartActivity"/>
     </application>
 
 </manifest>

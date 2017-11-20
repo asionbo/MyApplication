@@ -25,16 +25,14 @@ public abstract class BaseActivity extends AppCompatActivity implements MyKeyBoa
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-
         initMainView(getContentFragment());
-
         init();
         showHWBoard();
     }
 
     private void showHWBoard(){
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fl_keyBoard, new MyKeyBoardFragment(this), "key_board")
+                .replace(R.id.fl_keyBoard, new MyKeyBoardFragment(), "key_board")
                 .commit();
     }
 

@@ -1,6 +1,5 @@
 package com.example.asionbo.myapplication.ui.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -28,7 +28,7 @@ import java.util.Map;
  * Created by asionbo on 2017/10/13.
  */
 
-@SuppressLint("ValidFragment")
+
 public class MyKeyBoardFragment extends BaseFragment {
 
     private Context context;
@@ -40,13 +40,13 @@ public class MyKeyBoardFragment extends BaseFragment {
 
     private FragmentText listener;
 
-    public MyKeyBoardFragment(Context context) {
-        this.context = context;
+    public MyKeyBoardFragment(){
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        context = getActivity();
         if (activity instanceof FragmentText){
             listener = (FragmentText) activity;
         }else{
@@ -82,8 +82,8 @@ public class MyKeyBoardFragment extends BaseFragment {
 
     private void initView() {
         // 设置不调用系统键盘
-//            .setSoftInputMode(
-//                    WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         try {
             Class<EditText> cls = EditText.class;
             Method setShowSoftInputOnFocus;
