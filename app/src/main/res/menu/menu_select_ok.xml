@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/select"
+        android:icon="@drawable/ic_select_all_black_48dp"
+        android:orderInCategory="100"
+        android:title="@string/save_pic"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/ok"
+        android:icon="@drawable/ic_check_black_48dp"
+        android:orderInCategory="100"
+        android:title="@string/save_pic"
+        app:showAsAction="always"/>
+</menu>

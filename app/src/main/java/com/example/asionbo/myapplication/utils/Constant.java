@@ -9,4 +9,6 @@ public class Constant {
      * Rxbus
      * */
     public static final int CLICKBUTTON = 10;
+    public static final int SELECTALL_MODE = 11;
+    public static final int UNSELECTALL_MODE = 12;
 }

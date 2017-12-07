@@ -15,11 +15,32 @@
         />
     <Button
         android:id="@+id/btn_toFragment"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
         android:background="@color/colorAccent"
-        android:text="click to fragment"
+        android:text="click to chart"
+        />
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_toKotlin"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorAccent"
+        android:text="click to koltin"
+        />
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_toMulti"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorAccent"
+        android:text="click to Multi"
         />
 
 </LinearLayout>

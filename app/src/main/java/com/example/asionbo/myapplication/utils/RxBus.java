@@ -22,7 +22,7 @@ public enum  RxBus {
         mBus.accept(event);
     }
 
-    public <T> Observable<T> tObserverable(Class<T> eventType){
+    public <T> Observable<T> toObserverable(Class<T> eventType){
         return mBus.ofType(eventType);
     }
 
