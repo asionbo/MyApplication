@@ -10,9 +10,12 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asionbo.myapplication.R;
@@ -65,9 +68,15 @@ public class MultiSelectActivity extends AppCompatActivity  {
         File directory = Environment.getExternalStorageDirectory();
         File[] files = directory.listFiles();
         list = new ArrayList<>();
-        for (File file : files) {
-            list.add(file.getName());
+        if (files == null){
+            list.add("null data");
+        }else{
+            for (File file : files) {
+                list.add(file.getName());
+            }
         }
+
+
     }
 
     private void initView() {
@@ -78,6 +87,7 @@ public class MultiSelectActivity extends AppCompatActivity  {
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    TextView text;
     @Override
     protected void onResume() {
         super.onResume();
@@ -95,10 +105,15 @@ public class MultiSelectActivity extends AppCompatActivity  {
                                 Toast.makeText(this,"Long_click:"+ss,Toast.LENGTH_SHORT).show();
                                 if (actionMode == null){
                                     mToolbar.startActionMode(new android.view.ActionMode.Callback() {
+
                                         @Override
                                         public boolean onCreateActionMode(android.view.ActionMode mode, Menu menu) {
                                             MenuInflater menuInflater = mode.getMenuInflater();
                                             menuInflater.inflate(R.menu.menu_select_ok,menu);
+                                            View inflate = LayoutInflater.from(MultiSelectActivity.this).inflate(R.layout.action_mode_view, null);
+                                            mode.setCustomView(inflate);
+                                            text = (TextView) inflate.findViewById(R.id.tv_title);
+                                            text.setText("MultiSelect");
                                             mAdapter.setMulti(true);
                                             return true;
                                         }
@@ -114,9 +129,11 @@ public class MultiSelectActivity extends AppCompatActivity  {
                                                 case R.id.select:
                                                     if (currentSelectAll){
                                                         mAdapter.selectAll();
+                                                        text.setText("已选中"+mAdapter.getItemCount()+"个");
                                                         currentSelectAll = false;
                                                     }else{
                                                         mAdapter.unSelectAll();
+                                                        text.setText("已选中0个");
                                                         currentSelectAll = true;
                                                     }
                                                     break;
@@ -136,8 +153,10 @@ public class MultiSelectActivity extends AppCompatActivity  {
                                 }
                                 break;
                             case 3:
-//                                String s3 = (String) userEvent.getPost();
-//                                Toast.makeText(this,"选中:"+s3,Toast.LENGTH_SHORT).show();
+                                int t = (int) userEvent.getPost();
+                                if (text != null){
+                                    text.setText("已选中"+t+"个");
+                                }
                                 break;
                         }
                     }, throwable -> {

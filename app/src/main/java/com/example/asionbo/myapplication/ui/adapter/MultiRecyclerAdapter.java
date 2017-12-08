@@ -2,6 +2,7 @@ package com.example.asionbo.myapplication.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.DigitsKeyListener;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,24 +81,19 @@ public class MultiRecyclerAdapter extends RecyclerView.Adapter<MultiRecyclerAdap
     public void onBindViewHolder(DataViewHolder holder, int position) {
         String s = getData().get(position);
         holder.tvItem.setText(s);
+        holder.checkBox.setTag(position);
         if (isMulti){//多选时单机
             holder.checkBox.setVisibility(View.VISIBLE);
-            if (booleanArray.get(position)){
-                holder.checkBox.setChecked(true);
-            }else{
-                holder.checkBox.setChecked(false);
-            }
+            holder.checkBox.setChecked(booleanArray.get(position));
             holder.rootView.setOnClickListener(l->{
-                if (holder.checkBox.isChecked()){
-                    holder.checkBox.setChecked(false);
-                }else{
-                    holder.checkBox.setChecked(true);
-                }
+                holder.checkBox.setChecked(!holder.checkBox.isChecked());
+                RxBus.INSTANCE.post(new Event(3,getSelectItems().size()));
             });
             holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                LogUtils.e("check---"+position+"="+isChecked);
-                booleanArray.append(position,isChecked);
+                int i = (int) buttonView.getTag();
+                booleanArray.append(i,isChecked);
             });
+
         }else{
             //单选时单机
             holder.checkBox.setVisibility(View.GONE);
@@ -106,6 +102,7 @@ public class MultiRecyclerAdapter extends RecyclerView.Adapter<MultiRecyclerAdap
             });
         }
         holder.rootView.setOnLongClickListener(l->{
+            initArray();
             RxBus.INSTANCE.post(new Event(2,s));
             return false;
         });
