@@ -1,5 +1,6 @@
 package com.example.asionbo.myapplication.ui.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.asionbo.myapplication.R;
 import com.example.asionbo.myapplication.ui.ChartActivity;
 import com.example.asionbo.myapplication.ui.MultiSelectActivity;
@@ -29,6 +32,7 @@ public class MainFragment extends BaseFragment {
         Button mBtn = (Button) view.findViewById(R.id.btn_toFragment);
         Button mBtnToKt = (Button) view.findViewById(R.id.btn_toKotlin);
         Button toMulti = (Button) view.findViewById(R.id.btn_toMulti);
+        Button showProgress = (Button) view.findViewById(R.id.btn_showProgress);
 
         mBtn.setOnClickListener(l ->{
             clickToFragment();
@@ -39,6 +43,10 @@ public class MainFragment extends BaseFragment {
 
         toMulti.setOnClickListener(l->{
             clickMulti();
+        });
+
+        showProgress.setOnClickListener(l->{
+            showDownloadDialog(false);
         });
         return view;
     }
@@ -60,5 +68,54 @@ public class MainFragment extends BaseFragment {
     void clickToKt(){
         Intent intent = new Intent(getActivity(), KtTest_Java.class);
         startActivity(intent);
+    }
+
+    void showDownloadDialog(boolean isIndeterminate){
+        if (isIndeterminate){
+            new MaterialDialog.Builder(getContext())
+                    .title(R.string.progress_dialog_title)
+                    .content(R.string.please_wait)
+                    .progress(true, 0)
+                    .show();
+        }else{
+            new MaterialDialog.Builder(getContext())
+                    .title(R.string.progress_dialog_title)
+                    .content(R.string.please_wait)
+                    .progress(false, 150,true)
+                    .showListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface dialogInterface) {
+                            MaterialDialog dialog = (MaterialDialog) dialogInterface;
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    while (dialog.getCurrentProgress() != dialog.getMaxProgress()){
+                                        if (dialog.isCancelled()){
+                                            break;
+                                        }
+                                        try {
+                                            Thread.sleep(50);
+                                        } catch (InterruptedException e) {
+                                            break;
+                                        }
+                                        getActivity().runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                dialog.incrementProgress(1);
+                                            }
+                                        });
+                                    }
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            dialog.setContent(R.string.done);
+                                            dialog.setActionButton(DialogAction.NEGATIVE,android.R.string.ok);
+                                        }
+                                    });
+                                }
+                            }).start();
+                        }
+                    }).show();
+        }
     }
 }

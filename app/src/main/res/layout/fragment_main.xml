@@ -42,5 +42,15 @@
         android:background="@color/colorAccent"
         android:text="click to Multi"
         />
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_showProgress"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorAccent"
+        android:text="show Progress"
+        />
 
 </LinearLayout>

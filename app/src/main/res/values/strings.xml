@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="save_pic">保存图片</string>
+    <string name="progress_dialog_title">进度提示</string>
+    <string name="please_wait">请稍候</string>
+    <string name="done">任务完成</string>
 </resources>
