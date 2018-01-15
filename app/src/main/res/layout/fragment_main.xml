@@ -13,44 +13,85 @@
         tools:text="hhhh"
         android:textSize="40sp"
         />
-    <Button
-        android:id="@+id/btn_toFragment"
-        android:padding="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorAccent"
-        android:text="click to chart"
-        />
-    <Button
-        android:layout_marginTop="10dp"
-        android:id="@+id/btn_toKotlin"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorAccent"
-        android:text="click to koltin"
-        />
-    <Button
-        android:layout_marginTop="10dp"
-        android:id="@+id/btn_toMulti"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorAccent"
-        android:text="click to Multi"
-        />
-    <Button
-        android:layout_marginTop="10dp"
-        android:id="@+id/btn_showProgress"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorAccent"
-        android:text="show Progress"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <Button
+                android:id="@+id/btn_toFragment"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorAccent"
+                android:text="click to chart"
+                />
+            <Button
+                android:id="@+id/btn_toKotlin"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorAccent"
+                android:text="click to koltin"
+                />
+            <Button
+                android:id="@+id/btn_toMulti"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorAccent"
+                android:text="click to Multi"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/btn_showProgress"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorAccent"
+                android:text="show Progress"
+                />
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/btn_shake"
+                android:padding="10dp"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorAccent"
+                android:text="shaking"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

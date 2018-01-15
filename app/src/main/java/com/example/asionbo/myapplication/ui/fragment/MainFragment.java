@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -33,6 +35,7 @@ public class MainFragment extends BaseFragment {
         Button mBtnToKt = (Button) view.findViewById(R.id.btn_toKotlin);
         Button toMulti = (Button) view.findViewById(R.id.btn_toMulti);
         Button showProgress = (Button) view.findViewById(R.id.btn_showProgress);
+        Button shake = (Button) view.findViewById(R.id.btn_shake);
 
         mBtn.setOnClickListener(l ->{
             clickToFragment();
@@ -43,6 +46,11 @@ public class MainFragment extends BaseFragment {
 
         toMulti.setOnClickListener(l->{
             clickMulti();
+        });
+
+        shake.setOnClickListener(l->{
+            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
+            shake.startAnimation(animation);
         });
 
         showProgress.setOnClickListener(l->{
