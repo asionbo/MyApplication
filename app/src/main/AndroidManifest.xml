@@ -23,8 +23,8 @@
         <activity android:name=".ui.TraceActivity"/>
         <activity android:name=".ui.ChartActivity" />
         <activity android:name=".ui.kotlin.KtTest_Java"/>
-        <activity android:name=".ui.MultiSelectActivity"
-            />
+        <activity android:name=".ui.MultiSelectActivity"/>
+        <activity android:name=".ui.LottieAniActivity"/>
     </application>
 
 </manifest>

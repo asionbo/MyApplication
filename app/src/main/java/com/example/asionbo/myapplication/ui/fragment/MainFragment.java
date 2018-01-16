@@ -15,6 +15,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.asionbo.myapplication.R;
 import com.example.asionbo.myapplication.ui.ChartActivity;
+import com.example.asionbo.myapplication.ui.LottieAniActivity;
 import com.example.asionbo.myapplication.ui.MultiSelectActivity;
 import com.example.asionbo.myapplication.ui.kotlin.KtTest_Java;
 import com.example.asionbo.myapplication.utils.LogUtils;
@@ -51,6 +52,7 @@ public class MainFragment extends BaseFragment {
         shake.setOnClickListener(l->{
             Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
             shake.startAnimation(animation);
+            startActivity(new Intent(getContext(),LottieAniActivity.class));
         });
 
         showProgress.setOnClickListener(l->{
