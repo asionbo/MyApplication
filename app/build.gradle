@@ -51,6 +51,7 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxjava:2.1.5'
     compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
     compile 'com.airbnb.android:lottie:2.2.5'
+    compile 'com.gordonwong:material-sheet-fab:1.2.1'
 }
 repositories {
     mavenCentral()

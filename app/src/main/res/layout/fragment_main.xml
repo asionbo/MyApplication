@@ -119,6 +119,18 @@
                     android:background="@color/colorAccent"
                     android:text="sign in/up"
                     />
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btn_sheet_fab"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorAccent"
+                    android:text="null"
+                    />
 
             </LinearLayout>
 

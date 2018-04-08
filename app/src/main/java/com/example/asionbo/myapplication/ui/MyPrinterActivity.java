@@ -30,6 +30,9 @@ import com.example.asionbo.myapplication.utils.Constant;
 import com.example.asionbo.myapplication.utils.LogUtils;
 import com.example.asionbo.myapplication.utils.PrintUtils;
 import com.example.asionbo.myapplication.utils.RxBus;
+import com.example.asionbo.myapplication.view.MySheetFab;
+import com.gordonwong.materialsheetfab.MaterialSheetFab;
+import com.gordonwong.materialsheetfab.MaterialSheetFabEventListener;
 
 import java.util.Set;
 
@@ -60,6 +63,7 @@ public class MyPrinterActivity extends AppCompatActivity {
     private Intent mBluetoothIntent;
     private String mBluetoothName;
     protected Disposable mDisposable;
+    private MaterialSheetFab materialSheetFab;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +80,40 @@ public class MyPrinterActivity extends AppCompatActivity {
         mBluetoothIntent = new Intent(this, BluetoothService.class);
         mBluetoothIntent.putExtra("type", 0);
         startService(mBluetoothIntent);
+        MySheetFab fab = (MySheetFab) findViewById(R.id.fab);
+        View sheetView = findViewById(R.id.fab_sheet);
+        View overlay = findViewById(R.id.overlay);
+        int sheetColor = getResources().getColor(R.color.colorWhite);
+        int fabColor = getResources().getColor(R.color.colorPrimary);
+
+        // Initialize material sheet FAB
+        materialSheetFab = new MaterialSheetFab<>(fab, sheetView, overlay,
+                sheetColor, fabColor);
+
+        materialSheetFab.setEventListener(new MaterialSheetFabEventListener() {
+            @Override
+            public void onShowSheet() {
+                LogUtils.e("onShowSheet");
+                // Called when the material sheet's "show" animation starts.
+            }
+
+            @Override
+            public void onSheetShown() {
+                LogUtils.e("onSheetShown");
+                // Called when the material sheet's "show" animation ends.
+            }
+
+            @Override
+            public void onHideSheet() {
+                LogUtils.e("onHideSheet");
+                // Called when the material sheet's "hide" animation starts.
+            }
+            @Override
+            public void onSheetHidden() {
+                LogUtils.e("onSheetHidden");
+                // Called when the material sheet's "hide" animation ends.
+            }
+        });
     }
 
     @Override
@@ -263,5 +301,14 @@ public class MyPrinterActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test_2);
         PrintUtils.printBitmap(bitmap,320,240);
         PrintUtils.printQR(PrintUtils.createQRCode(printText.getText().toString(),240));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (materialSheetFab.isSheetVisible()) {
+            materialSheetFab.hideSheet();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
