@@ -1,0 +1,65 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/res/merged/androidTest/debug/values-zh-rHK_values-zh-rHK.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/bundles/debug/res/values-zh-rHK/values-zh-rHK.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/res/merged/androidTest/debug/values-zh-rCN_values-zh-rCN.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/bundles/debug/res/values-zh-rCN/values-zh-rCN.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/res/merged/androidTest/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/bundles/debug/res/values/values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,162,210,258,311,363,399,442,488,522,567,615,662,775",
+                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,21",
+                        "endColumns": "58,47,47,47,52,51,35,42,45,33,44,47,46,112,12",
+                        "endOffsets": "109,157,205,253,306,358,394,437,483,517,562,610,657,770,1077"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/res/merged/androidTest/debug/values-zh-rTW_values-zh-rTW.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/bundles/debug/res/values-zh-rTW/values-zh-rTW.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        }
+    ]
+}

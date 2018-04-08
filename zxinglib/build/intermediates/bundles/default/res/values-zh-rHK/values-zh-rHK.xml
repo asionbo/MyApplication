@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="zxing_msg_default_status">請將二維碼置於取景框內掃描</string>
+</resources>

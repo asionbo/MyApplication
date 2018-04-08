@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/res/merged/androidTest/debug/drawable_launcher_icon.png.flat",
+        "source": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/bundles/debug/res/drawable/launcher_icon.png"
+    },
+    {
+        "merged": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/res/merged/androidTest/debug/layout_activity_zxing_capture.xml.flat",
+        "source": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/bundles/debug/res/layout/activity_zxing_capture.xml"
+    },
+    {
+        "merged": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/res/merged/androidTest/debug/raw_beep.ogg.flat",
+        "source": "/Users/asionbo/AndroidStudioProjects/GitWork/IField/zxinglib/build/intermediates/bundles/debug/res/raw/beep.ogg"
+    }
+]
