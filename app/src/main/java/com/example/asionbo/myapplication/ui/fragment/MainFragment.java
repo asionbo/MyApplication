@@ -2,8 +2,10 @@ package com.example.asionbo.myapplication.ui.fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,10 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.asionbo.myapplication.R;
 import com.example.asionbo.myapplication.ui.ChartActivity;
+import com.example.asionbo.myapplication.ui.LoginActivity;
 import com.example.asionbo.myapplication.ui.LottieAniActivity;
 import com.example.asionbo.myapplication.ui.MultiSelectActivity;
+import com.example.asionbo.myapplication.ui.MyPrinterActivity;
 import com.example.asionbo.myapplication.ui.kotlin.KtTest_Java;
 import com.example.asionbo.myapplication.utils.LogUtils;
 
@@ -36,7 +40,9 @@ public class MainFragment extends BaseFragment {
         Button mBtnToKt = (Button) view.findViewById(R.id.btn_toKotlin);
         Button toMulti = (Button) view.findViewById(R.id.btn_toMulti);
         Button showProgress = (Button) view.findViewById(R.id.btn_showProgress);
+        Button print = (Button) view.findViewById(R.id.btn_printer);
         Button shake = (Button) view.findViewById(R.id.btn_shake);
+        Button login = (Button) view.findViewById(R.id.btn_login);
 
         mBtn.setOnClickListener(l ->{
             clickToFragment();
@@ -58,6 +64,14 @@ public class MainFragment extends BaseFragment {
         showProgress.setOnClickListener(l->{
             showDownloadDialog(false);
         });
+        print.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),MyPrinterActivity.class);
+            startActivity(intent);
+        });
+        login.setOnClickListener(l->{
+            startActivity(new Intent(getContext(),LoginActivity.class));
+        });
+
         return view;
     }
 

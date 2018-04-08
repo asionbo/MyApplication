@@ -75,4 +75,40 @@ public class ExampleUnitTest {
         System.out.println(new BigDecimal(c).doubleValue());
         System.out.println(new BigDecimal(c).setScale(5,BigDecimal.ROUND_HALF_UP).doubleValue());
     }
+
+//    @Test
+    public void testYu(){
+        int a = 31;
+        int b = 36;
+        int c = a - b%a;
+        int d = a/2;
+        String r = "";
+        r = Integer.toHexString(23);
+        if (r.length() % 2 == 1) {
+            r = "0" + r;
+        }
+        System.out.println((byte)a);
+        String s = patchHexString(r, 2);
+        String h = "0x"+s;
+//        System.out.println(s);
+    }
+
+    /**
+     * HEX字符串前补0，主要用于长度位数不足。
+     *
+     * @param str
+     *            String 需要补充长度的十六进制字符串
+     * @param maxLength
+     *            int 补充后十六进制字符串的长度
+     * @return 补充结果
+     */
+    static public String patchHexString(String str, int maxLength) {
+        String temp = "";
+        for (int i = 0; i < maxLength - str.length(); i++) {
+            temp = "0" + temp;
+        }
+        str = (temp + str).substring(0, maxLength);
+        return str;
+    }
+
 }

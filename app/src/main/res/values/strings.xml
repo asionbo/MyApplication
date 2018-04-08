@@ -4,4 +4,14 @@
     <string name="progress_dialog_title">进度提示</string>
     <string name="please_wait">请稍候</string>
     <string name="done">任务完成</string>
+    <string name="login_success">login success</string>
+    <string name="login">LOGIN</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="forgot_your_password">Forgot your password ?</string>
+    <string name="go">GO</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="next">NEXT</string>
+    <string name="register">REGISTER</string>
+    <string name="connect_match">如上列表没有,请到系统的蓝牙中进行匹配</string>
 </resources>

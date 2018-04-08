@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.asionbo.myapplication" >
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
@@ -25,6 +27,11 @@
         <activity android:name=".ui.kotlin.KtTest_Java"/>
         <activity android:name=".ui.MultiSelectActivity"/>
         <activity android:name=".ui.LottieAniActivity"/>
+        <activity android:name=".ui.LoginActivity"/>
+        <activity android:name=".ui.RegisterActivity"/>
+        <activity android:name=".ui.MyPrinterActivity" />
+
+        <service android:name=".service.BluetoothService" />
     </application>
 
 </manifest>
