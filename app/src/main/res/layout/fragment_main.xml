@@ -121,7 +121,7 @@
                     />
                 <Button
                     android:layout_marginTop="10dp"
-                    android:id="@+id/btn_sheet_fab"
+                    android:id="@+id/btn_get_mac"
                     android:padding="10dp"
                     android:layout_margin="5dp"
                     android:layout_width="0dp"
@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorWhite"
                     android:background="@color/colorAccent"
-                    android:text="null"
+                    android:text="Mac-IMEI"
                     />
 
             </LinearLayout>

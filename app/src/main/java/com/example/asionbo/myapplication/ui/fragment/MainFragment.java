@@ -1,9 +1,14 @@
 package com.example.asionbo.myapplication.ui.fragment;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +26,12 @@ import com.example.asionbo.myapplication.ui.MultiSelectActivity;
 import com.example.asionbo.myapplication.ui.MyPrinterActivity;
 import com.example.asionbo.myapplication.ui.kotlin.KtTest_Java;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+
+import static android.content.Context.TELEPHONY_SERVICE;
+
 
 /**
  * Created by asionbo on 2017/10/13.
@@ -28,11 +39,13 @@ import com.example.asionbo.myapplication.ui.kotlin.KtTest_Java;
 
 public class MainFragment extends BaseFragment {
 
+    private String mac, imei;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main,container,false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
         Button mBtn = (Button) view.findViewById(R.id.btn_toFragment);
         Button mBtnToKt = (Button) view.findViewById(R.id.btn_toKotlin);
         Button toMulti = (Button) view.findViewById(R.id.btn_toMulti);
@@ -40,7 +53,51 @@ public class MainFragment extends BaseFragment {
         Button print = (Button) view.findViewById(R.id.btn_printer);
         Button shake = (Button) view.findViewById(R.id.btn_shake);
         Button login = (Button) view.findViewById(R.id.btn_login);
+        Button getMac = (Button) view.findViewById(R.id.btn_get_mac);
 
+
+        TelephonyManager telephonyManager = (TelephonyManager) getActivity().getSystemService(TELEPHONY_SERVICE);
+        if (telephonyManager != null) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return null;
+            }
+            imei = TextUtils.isEmpty(telephonyManager.getDeviceId()) ? "-1" : telephonyManager.getDeviceId();
+        }
+
+        String str = "";
+        try {
+            Process pp = Runtime.getRuntime().exec(
+                    "cat /sys/class/net/wlan0/address ");
+            InputStreamReader ir = new InputStreamReader(pp.getInputStream());
+            LineNumberReader input = new LineNumberReader(ir);
+
+
+            for (; null != str;) {
+                str = input.readLine();
+                if (str != null) {
+                    mac = str.trim();// 去空格
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            mac = "233333333";
+            // 赋予默认值
+            ex.printStackTrace();
+        }
+
+        getMac.setOnClickListener(l->{
+            new MaterialDialog.Builder(getActivity())
+                    .title("IMEI-MAC信息")
+                    .content("IMEI:"+imei+"\n"+"MAC:"+mac)
+                    .positiveText("了解").show();
+        });
         mBtn.setOnClickListener(l ->{
             clickToFragment();
         });
