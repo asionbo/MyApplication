@@ -20,6 +20,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.asionbo.myapplication.R;
 import com.example.asionbo.myapplication.ui.ChartActivity;
+import com.example.asionbo.myapplication.ui.ImageUploadDialog;
 import com.example.asionbo.myapplication.ui.LoginActivity;
 import com.example.asionbo.myapplication.ui.LottieAniActivity;
 import com.example.asionbo.myapplication.ui.MultiSelectActivity;
@@ -54,6 +55,7 @@ public class MainFragment extends BaseFragment {
         Button shake = (Button) view.findViewById(R.id.btn_shake);
         Button login = (Button) view.findViewById(R.id.btn_login);
         Button getMac = (Button) view.findViewById(R.id.btn_get_mac);
+        Button picUpload = view.findViewById(R.id.btn_image_upload);
 
 
         TelephonyManager telephonyManager = (TelephonyManager) getActivity().getSystemService(TELEPHONY_SERVICE);
@@ -124,6 +126,10 @@ public class MainFragment extends BaseFragment {
         });
         login.setOnClickListener(l->{
             startActivity(new Intent(getContext(),LoginActivity.class));
+        });
+
+        picUpload.setOnClickListener(v -> {
+            new ImageUploadDialog().show(getActivity().getSupportFragmentManager(),"dialog");
         });
 
         return view;

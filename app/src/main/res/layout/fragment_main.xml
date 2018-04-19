@@ -131,6 +131,18 @@
                     android:background="@color/colorAccent"
                     android:text="Mac-IMEI"
                     />
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btn_image_upload"
+                    android:padding="10dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/colorAccent"
+                    android:text="图片上传"
+                    />
 
             </LinearLayout>
 
