@@ -1,6 +1,7 @@
 package com.example.asionbo.myapplication.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -9,10 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.asionbo.myapplication.R;
 import com.example.asionbo.myapplication.ui.adapter.ImagePickerAdapter;
 import com.example.asionbo.myapplication.ui.dialog.SelectDialog;
@@ -34,6 +38,7 @@ import java.util.List;
 public class ImageUploadDialog extends DialogFragment implements ImagePickerAdapter.OnRecyclerViewItemClickListener{
 
     public static final int IMAGE_ITEM_ADD = -1;
+    public static final int IMAGE_ITEM_DEL = -2;
     public static final int REQUEST_CODE_SELECT = 100;
     public static final int REQUEST_CODE_PREVIEW = 101;
 
@@ -60,7 +65,7 @@ public class ImageUploadDialog extends DialogFragment implements ImagePickerAdap
         adapter = new ImagePickerAdapter(getActivity(), selImageList, maxImgCount);
         adapter.setOnItemClickListener(this);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), maxImgCount));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         return view;
@@ -91,8 +96,9 @@ public class ImageUploadDialog extends DialogFragment implements ImagePickerAdap
         return dialog;
     }
 
+    private TextView tvCamera,tvPhoto,tvCancel;
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(View view, int position,boolean isDel) {
         if (rbGlide.isChecked()) {
             imagePicker.setImageLoader(new GlideImageLoader());
         }else {
@@ -100,50 +106,61 @@ public class ImageUploadDialog extends DialogFragment implements ImagePickerAdap
         }
         switch (position){
             case IMAGE_ITEM_ADD:
-                List<String> names = new ArrayList<>();
-                names.add("拍照");
-                names.add("相册");
-                showDialog(new SelectDialog.SelectDialogListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        switch (position) {
-                            case 0: // 直接调起相机
-                                /**
-                                 * 0.4.7 目前直接调起相机不支持裁剪，如果开启裁剪后不会返回图片，请注意，后续版本会解决
-                                 *
-                                 * 但是当前直接依赖的版本已经解决，考虑到版本改动很少，所以这次没有上传到远程仓库
-                                 *
-                                 * 如果实在有所需要，请直接下载源码引用。
-                                 */
-                                //打开选择,本次允许选择的数量
-                                ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
-                                Intent intent = new Intent(getActivity(), ImageGridActivity.class);
-                                intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
-                                startActivityForResult(intent, REQUEST_CODE_SELECT);
-                                break;
-                            case 1:
-                                //打开选择,本次允许选择的数量
-                                ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
-                                Intent intent1 = new Intent(getActivity(), ImageGridActivity.class);
+                MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                        .customView(R.layout.dialog_bottom_select, false)
+                        .backgroundColor(Color.parseColor("#00000001"))
+                        .build();
+                tvCamera = dialog.getCustomView().findViewById(R.id.tv_camera);
+                tvPhoto = dialog.getCustomView().findViewById(R.id.tv_photo);
+                tvCancel = dialog.getCustomView().findViewById(R.id.tv_cancel);
+                Window window = dialog.getWindow();
+                window.setBackgroundDrawableResource(android.R.color.transparent);
+                window.setWindowAnimations(R.style.main_menu_animstyle);
+                WindowManager.LayoutParams wlp = window.getAttributes();
+                wlp.x = 100;
+                wlp.y = getActivity().getWindowManager().getDefaultDisplay().getHeight();
+                wlp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                wlp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                window.setAttributes(wlp);
+
+                tvCamera.setOnClickListener(v -> {
+                    //打开选择,本次允许选择的数量
+//                    ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
+                    Intent intent = new Intent(getActivity(), ImageGridActivity.class);
+                    intent.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true); // 是否是直接打开相机
+                    startActivityForResult(intent, REQUEST_CODE_SELECT);
+
+                    dialog.dismiss();
+                });
+                tvPhoto.setOnClickListener(v -> {
+                    Intent intent1 = new Intent(getActivity(), ImageGridActivity.class);
                                 /* 如果需要进入选择的时候显示已经选中的图片，
                                  * 详情请查看ImagePickerActivity
                                  * */
-//                                intent1.putExtra(ImageGridActivity.EXTRAS_IMAGES,images);
-                                startActivityForResult(intent1, REQUEST_CODE_SELECT);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }, names);
+                    intent1.putExtra(ImageGridActivity.EXTRAS_IMAGES, images);
+                    startActivityForResult(intent1, REQUEST_CODE_SELECT);
+
+                    dialog.dismiss();
+                });
+                tvCancel.setOnClickListener(v -> dialog.dismiss());
+                dialog.show();
                 break;
                 default:
-                    //打开预览
-                    Intent intentPreview = new Intent(getActivity(), ImagePreviewDelActivity.class);
-                    intentPreview.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, (ArrayList<ImageItem>) adapter.getImages());
-                    intentPreview.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
-                    intentPreview.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
-                    startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
+                    if (isDel){
+                        images.remove(position);
+                        if (images != null) {
+                            selImageList.clear();
+                            selImageList.addAll(images);
+                            adapter.setImages(selImageList);
+                        }
+                    }else {
+                        //打开预览
+                        Intent intentPreview = new Intent(getActivity(), ImagePreviewDelActivity.class);
+                        intentPreview.putExtra(ImagePicker.EXTRA_IMAGE_ITEMS, (ArrayList<ImageItem>) adapter.getImages());
+                        intentPreview.putExtra(ImagePicker.EXTRA_SELECTED_IMAGE_POSITION, position);
+                        intentPreview.putExtra(ImagePicker.EXTRA_FROM_ITEMS, true);
+                        startActivityForResult(intentPreview, REQUEST_CODE_PREVIEW);
+                    }
                     break;
         }
     }
@@ -157,6 +174,7 @@ public class ImageUploadDialog extends DialogFragment implements ImagePickerAdap
             if (data != null && requestCode == REQUEST_CODE_SELECT) {
                 images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 if (images != null) {
+                    selImageList.clear();
                     selImageList.addAll(images);
                     adapter.setImages(selImageList);
                 }

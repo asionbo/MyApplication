@@ -12,11 +12,14 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.asionbo.myapplication.R;
 import com.example.asionbo.myapplication.ui.ChartActivity;
@@ -95,10 +98,22 @@ public class MainFragment extends BaseFragment {
         }
 
         getMac.setOnClickListener(l->{
-            new MaterialDialog.Builder(getActivity())
+            MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
                     .title("IMEI-MAC信息")
-                    .content("IMEI:"+imei+"\n"+"MAC:"+mac)
-                    .positiveText("了解").show();
+                    .titleGravity(GravityEnum.CENTER)
+                    .content("IMEI:" + imei + "\n" + "MAC:" + mac)
+                    .contentGravity(GravityEnum.CENTER)
+                    .positiveText("了解").build();
+
+            Window window = dialog.getWindow();
+            window.setWindowAnimations(R.style.main_menu_animstyle);
+            WindowManager.LayoutParams wlp = window.getAttributes();
+            wlp.x = 100;
+            wlp.y = getActivity().getWindowManager().getDefaultDisplay().getHeight();
+            wlp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            wlp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            window.setAttributes(wlp);
+            dialog.show();
         });
         mBtn.setOnClickListener(l ->{
             clickToFragment();

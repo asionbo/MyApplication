@@ -2,14 +2,18 @@ package com.example.asionbo.myapplication.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.asionbo.myapplication.R;
 import com.example.asionbo.myapplication.ui.ImageUploadDialog;
+import com.example.asionbo.myapplication.utils.LogUtils;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 
@@ -34,7 +38,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
     private boolean isAdded;   //是否额外添加了最后一个图片
 
     public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int position,boolean isDel);
     }
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
@@ -67,7 +71,7 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
 
     @Override
     public SelectedPicViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SelectedPicViewHolder(mInflater.inflate(R.layout.list_item_image, parent, false));
+        return new SelectedPicViewHolder(mInflater.inflate(R.layout.list_item_image_del, parent, false));
     }
 
     @Override
@@ -80,33 +84,72 @@ public class ImagePickerAdapter extends RecyclerView.Adapter<ImagePickerAdapter.
         return mData.size();
     }
 
-    public class SelectedPicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class SelectedPicViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
 
-        private ImageView iv_img;
+        private ImageView iv_img,iv_del;
         private int clickPosition;
 
         public SelectedPicViewHolder(View itemView) {
             super(itemView);
             iv_img = (ImageView) itemView.findViewById(R.id.iv_img);
+            iv_del = (ImageView) itemView.findViewById(R.id.iv_del);
         }
 
         public void bind(int position) {
             //设置条目的点击事件
-            itemView.setOnClickListener(this);
+            itemView.setOnTouchListener(this);
+            iv_del.setOnTouchListener(this);
             //根据条目位置设置图片
             ImageItem item = mData.get(position);
             if (isAdded && position == getItemCount() - 1) {
                 iv_img.setImageResource(R.drawable.selector_image_add);
+                iv_del.setImageResource(R.drawable.bt_shape_2);
                 clickPosition = ImageUploadDialog.IMAGE_ITEM_ADD;
             } else {
-                ImagePicker.getInstance().getImageLoader().displayImage((Activity) mContext, item.path, iv_img, iv_img.getWidth(), 0);
+                ImagePicker.getInstance().getImageLoader().displayImage((Activity) mContext, item.path, iv_img, 0, 0);
+                ImagePicker.getInstance().getImageLoader().displayImage((Activity) mContext, "", iv_del, 0, 0);
                 clickPosition = position;
             }
         }
 
         @Override
-        public void onClick(View v) {
-            if (listener != null) listener.onItemClick(v, clickPosition);
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    break;
+                case MotionEvent.ACTION_UP:
+                    switch (v.getId()) {
+                        case R.id.iv_del:
+                            v.performClick();
+                            if (listener != null) listener.onItemClick(v, clickPosition, true);
+                            LogUtils.e("click-------------delete");
+                            break;
+                        default:
+                            if (listener != null) listener.onItemClick(v, clickPosition, false);
+                            LogUtils.e("click-----img");
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            return true;
         }
+
+//        @Override
+//        public void onClick(View v) {
+//            switch (v.getId()){
+//                case R.id.iv_img:
+//                    if (listener != null) listener.onItemClick(v, clickPosition,false);
+//                    LogUtils.e("click-----img");
+//                    break;
+//                case R.id.iv_del:
+//                    if (listener != null) listener.onItemClick(v, clickPosition,true);
+//                    LogUtils.e("click-------------delete");
+//                    break;
+//            }
+//
+//        }
     }
 }

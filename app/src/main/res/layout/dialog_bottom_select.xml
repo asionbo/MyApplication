@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:background="@android:color/transparent"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="拍照"
+        android:gravity="center"
+        android:background="@drawable/dialog_item_bg_only"
+        android:padding="10dip"
+        android:textColor="#0073FF"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/tv_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:background="@drawable/dialog_item_bg_only"
+        android:padding="10dip"
+        android:textColor="#0073FF"
+        android:text="相册"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:background="@drawable/dialog_item_bg_only"
+        android:padding="10dip"
+        android:textColor="#0073FF"
+        android:text="取消"
+        android:textSize="14sp" />
+</LinearLayout>
